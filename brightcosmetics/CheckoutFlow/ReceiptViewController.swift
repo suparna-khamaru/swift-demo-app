@@ -19,6 +19,10 @@ class ReceiptViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        
         //TODO: return cartItems and products fetch cartItems
         MoltinManager.instance().getCartItems(cartId: ""){ (cartItems) -> (Void) in
             self.cartItems = cartItems
@@ -45,6 +49,12 @@ class ReceiptViewController: UIViewController {
         MoltinManager.instance().deleteCart(cartId: "") { () -> (Void) in
             print("Cart removed")
         }
+    }
+    
+    //Calls this function when the tap is recognized.
+    @objc func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
     
     override var prefersStatusBarHidden: Bool {

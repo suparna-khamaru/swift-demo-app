@@ -27,6 +27,10 @@ class CartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        
         checkoutButtonLabel.backgroundColor = Colors.buttonColor()
         checkoutButtonLabel.layer.cornerRadius = 25
         checkoutButtonLabel.setTitleColor(UIColor.white, for: .normal)
@@ -73,6 +77,12 @@ class CartViewController: UIViewController {
         }
     }
 
+    //Calls this function when the tap is recognized.
+    @objc func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }

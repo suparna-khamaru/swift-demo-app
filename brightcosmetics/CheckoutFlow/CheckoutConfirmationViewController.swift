@@ -40,6 +40,10 @@ class CheckoutConfirmationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        
         self.headerView.backgroundColor = Colors.buttonColor()
 
         self.voucherLabel.isHidden = true
@@ -80,6 +84,12 @@ class CheckoutConfirmationViewController: UIViewController {
         self.midLine.layer.addBorder(edge: .top, color: Colors.buttonOutlineGrey(), thickness: 2)
         self.bottomeLine.layer.addBorder(edge: .top, color: Colors.buttonOutlineGrey(), thickness: 2)
         
+    }
+    
+    //Calls this function when the tap is recognized.
+    @objc func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
     
     override var prefersStatusBarHidden: Bool {

@@ -20,6 +20,10 @@ class CheckoutDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        
         self.headerView.backgroundColor = Colors.buttonColor()
 
         nameField.layer.cornerRadius = 15.0
@@ -34,6 +38,12 @@ class CheckoutDetailViewController: UIViewController {
         continuePaymentButton.setTitleColor(UIColor.white, for: .normal)
         continuePaymentButton.clipsToBounds = true
         // Do any additional setup after loading the view.
+    }
+    
+    //Calls this function when the tap is recognized.
+    @objc func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
     
     override var prefersStatusBarHidden: Bool {
